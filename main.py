@@ -1,9 +1,8 @@
 from decimal import Decimal
 from tkinter import *
+from api import api_key
 import requests
 import timeit
-
-api_key = 'ba3416e49fa704ff6ab7a96621ff9430'
 
 def on_click():
     start = timeit.default_timer()
