@@ -2,22 +2,18 @@ from decimal import Decimal
 from tkinter import *
 from api import api_key
 import requests
-import timeit
+
 
 def on_click():
-    start = timeit.default_timer()
     try:
         response = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={entry.get()}&appid={api_key}')
         response.raise_for_status()
     except requests.exceptions.HTTPError as err:
-        temp_label.config(text = 'Invalid input: ' + err.response.text[24:38])
-        stop = timeit.default_timer()
-        print('Time: ', stop - start)  
+        temp_label.config(text='Invalid input: ' + err.response.text[24:38])
         return
     weather = "%.2f" % (response.json().get('main').get('temp') - 273.15)
-    temp_label.config(text = f'{weather}°C')
-    stop = timeit.default_timer()
-    print('Time: ', stop - start)  
+    temp_label.config(text=f'{weather}°C')
+
 
 if __name__ == "__main__":
 
@@ -25,7 +21,7 @@ if __name__ == "__main__":
     window.title('Weather app')
     window.iconbitmap('images/cloudy.ico')
 
-    entry = Entry (width=50)
+    entry = Entry(width=50)
     entry.pack()
     
     temp_label = Label(width=50, text='Temp will be there!')
